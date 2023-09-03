@@ -2,19 +2,11 @@
 
 
 def text_indentation(text):
-    if not isinstance(text, str):
+    if type(text) is not str:
         raise TypeError("text must be a string")
-    res = ""
+    
+    for delim in ".:?":
+        text = (delim + "\n\n").join(
+            [line.strip(" ") for line in text.split(delim)])
 
-    in_space = True
-    for char in text:
-        if char in [".", "?", ":"]:
-            res += char + "\n\n"
-            in_space = True
-        elif char == " ":
-            if in_space:
-                continue
-        else:
-            res += char
-            in_space = False
-    print(res.strip())
+    print(text, end="")
