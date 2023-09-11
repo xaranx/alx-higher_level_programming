@@ -6,4 +6,7 @@ class modul for BaseGeometry
 
 
 class BaseGeometry():
+    """
+    Empty class
+    """
     pass
