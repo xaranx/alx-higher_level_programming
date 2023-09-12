@@ -1,5 +1,10 @@
 #!/usr/bin/python3
 
+"""
+Module for read file methode
+"""
+
+
 def read_file(filename=""):
     """
     Methode for Read line
