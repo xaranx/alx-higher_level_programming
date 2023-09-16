@@ -74,7 +74,7 @@ class Rectangle(Base):
                 .format(self.id, self.x, self.y, self.width, self.height))
 
     """ *args """
-    def update(self, *args):
+    def update(self, *args, **kwargs):
         if args:
             num_args = len(args)
             if num_args >= 1:
@@ -87,3 +87,14 @@ class Rectangle(Base):
                 self.x = args[3]
             if num_args >= 5:
                 self.y = args[4]
+        else:
+            if 'id' in kwargs:
+                self.id = kwargs['id']
+            if 'width' in kwargs:
+                self.width = kwargs['width']
+            if 'height' in kwargs:
+                self.height = kwargs['height']
+            if 'x' in kwargs:
+                self.x = kwargs['x']
+            if 'y' in kwargs:
+                self.y = kwargs['y']
