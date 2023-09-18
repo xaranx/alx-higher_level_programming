@@ -34,23 +34,25 @@ class Base():
     @classmethod
     def save_to_file(cls, list_objs):
         """
-        class method that write the json string representation of list_objs to a file
+        class method that write the json string
+        representation of list_objs to a file
         """
-        if list_objs is not None:            
+        if list_objs is not None:
             list_objs = [obj.to_dictionary() for obj in list_objs]
         file_name = cls.__name__+".json"
         with open(file_name, "w") as file:
             file.write(cls.to_json_string(list_objs))
-    
+
     @staticmethod
     def from_json_string(json_string):
         """
-        static method that the return the list of the json string representation json_string
+        static method that the return the list
+        of the json string representation json_string
         """
         if json_string is None or json_string == "":
             return []
         return json.loads(json_string)
-    
+
     @classmethod
     def create(cls, **dictionary):
         """
@@ -67,17 +69,17 @@ class Base():
         """
         class method that return a list of instances
         """
-        file_name = cls.__name__+ ".json"
+        file_name = cls.__name__ + ".json"
         if not os.path.exists(file_name):
             return []
-        
+
         with open(file_name, "r") as file:
             json_string = file.read()
 
         data = cls.from_json_string(json_string)
         instances = [cls.create(**item) for item in data]
         return instances
-    
+
     @classmethod
     def save_to_file_csv(cls, list_objs):
         """
@@ -119,4 +121,3 @@ class Base():
             return [cls.create(**dictionary) for dictionary in list_dicts]
         except FileNotFoundError:
             return []
-
