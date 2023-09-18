@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 
+import os
 import json
 """
 Module base
@@ -59,3 +60,19 @@ class Base():
         elif cls.__name__ == "Square":
             dummy = cls(1)
         return dummy
+
+    @classmethod
+    def load_from_file(cls):
+        """
+        class method that return a list of instances
+        """
+        file_name = cls.__name__+ ".json"
+        if not os.path.exists(file_name):
+            return []
+        
+        with open(file_name, "r") as file:
+            json_string = file.read()
+
+        data = cls.from_json_string(json_string)
+        instances = [cls.create(**item) for item in data]
+        return instances
