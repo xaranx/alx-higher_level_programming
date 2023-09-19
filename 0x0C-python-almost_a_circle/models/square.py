@@ -1,13 +1,17 @@
 #!/usr/bin/python3
-from models.rectangle import Rectangle
 
-"""class Square that inherite from Rectangle"""
+"""
+Module: `square`
+"""
+
+
+from models.rectangle import Rectangle
 
 
 class Square(Rectangle):
-    """ class Square"""
+    """Class: `Square`"""
     def __init__(self, size, x=0, y=0, id=None):
-        """ constructore """
+        """Init method"""
         super().__init__(size, size, x, y, id)
 
     def __str__(self):
@@ -17,14 +21,17 @@ class Square(Rectangle):
 
     @property
     def size(self):
+        """Getter for size"""
         return self.width
 
     @size.setter
     def size(self, value):
+        """Setter for size"""
         self.width = value
         self.height = value
-    """ *args"""
+
     def update(self, *args, **kwargs):
+        """Update method"""
         if args:
             attrs = ["id", "size", "x", "y"]
             for i in range(len(args)):
@@ -33,6 +40,6 @@ class Square(Rectangle):
             for key, value in kwargs.items():
                 setattr(self, key, value)
 
-    """ methode return the dictionary representation of a square"""
     def to_dictionary(self):
+        """To dictionary method"""
         return {"id": self.id, "size": self.size, "x": self.x, "y": self.y}
