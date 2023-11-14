@@ -1,4 +1,5 @@
 #!/usr/bin/node
-// module export an empty class
+// Module that exports an empty class Rectangle
 module.exports = class Rectangle {
+
 };
