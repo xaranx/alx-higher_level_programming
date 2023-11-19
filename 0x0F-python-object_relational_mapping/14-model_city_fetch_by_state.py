@@ -1,22 +1,22 @@
 #!/usr/bin/python3
 
-"""script that changes the name of a State object
-from the database hbtn_0e_6_usa"""
+"""script that deletes all State objects with a name
+containing the letter a from the database hbtn_0e_6_usa"""
 
 from sys import argv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from model_state import Base, State
+from model_city import City
 
 
 if __name__ == "__main__":
-    """function body"""
+    """fonction body"""
     engine = create_engine('mysql+mysqldb://{}:{}@localhost/{}'
                            .format(argv[1], argv[2], argv[3]))
-    Base.metadata.create_all(engine)
     Session = sessionmaker(bind=engine)
     session = Session()
-    state = session.query(State).filter(State.id == 2).first()
-    state.name = "New Mexico"
-    session.commit()
+    for city, state in session.query(City, State).\
+            filter(City.state_id == State.id).order_by(City.id):
+        print('{}: ({}) {}'.format(state.name, city.id, city.name))
     session.close()
